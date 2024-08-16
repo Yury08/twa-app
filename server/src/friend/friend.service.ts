@@ -58,16 +58,14 @@ export class FriendService {
 	}
 
 	async cleanEarning(allFriends: Friend[]) {
-		allFriends.map(async (friend: Friend) => {
-			await this.prisma.friend.update({
-				where: {
-					id: friend.id
-				},
-				data: {
-					earn: 0
-				}
+		return this.prisma.$transaction(
+			allFriends.map(friend => {
+				return this.prisma.friend.update({
+					where: { id: friend.id },
+					data: { earn: 0 }
+				})
 			})
-		})
+		)
 	}
 
 	async getFriendsEarning(userId: string) {
