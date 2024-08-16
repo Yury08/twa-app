@@ -3,6 +3,7 @@ import { Prisma } from '@prisma/client'
 import { Decimal } from 'decimal.js'
 import { AuthDto } from 'src/auth/dto/auth.dto'
 import { PrismaService } from 'src/prisma.service'
+import { MenuDto } from './dto/menu.dto'
 
 @Injectable()
 export class UserService {
@@ -20,7 +21,7 @@ export class UserService {
 		})
 	}
 
-	getByUsername(username: string) {
+	async getByUsername(username: string) {
 		return this.prisma.user.findUnique({
 			where: {
 				username
@@ -62,6 +63,30 @@ export class UserService {
 			data: {
 				tickets
 			}
+		})
+	}
+
+	// menu (only admin users)
+	async createMenu(dto: MenuDto) {
+		return await this.prisma.menu.create({
+			data: {
+				title: dto.title,
+				link: dto.title,
+				icon: dto.icon
+			}
+		})
+	}
+
+	async getAllMenu() {
+		return await this.prisma.menu.findMany()
+	}
+
+	async updateMenu(dto: MenuDto, menuId: string) {
+		return await this.prisma.menu.update({
+			where: {
+				id: menuId
+			},
+			data: dto
 		})
 	}
 }
