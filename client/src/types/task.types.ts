@@ -5,7 +5,7 @@ export interface ITask extends IBase {
 	title: string
 	reward: number
 	type: TypeTask
-	UserTask: IUserTask
+	UserTask: Pick<IUserTask, 'isCompleted'>
 }
 
 export interface IUserTask {
@@ -24,3 +24,9 @@ export enum TypeTask {
 	promo,
 	general
 }
+
+export type ITaskForm = Partial<
+	Omit<ITask, 'id' | 'createdAt' | 'updatedAt' | 'UserTask'>
+>
+
+export type ITaskCompleteResponse = Pick<ITask, 'UserTask'>

@@ -10,3 +10,5 @@ export interface IFarming extends IBase {
 	user: IUser
 	userId: string
 }
+
+export type IFarmingResponse = Partial<Omit<IFarming, 'user'>>

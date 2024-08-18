@@ -56,12 +56,19 @@ export class TasksService {
 		})
 	}
 
+	// async createTasks(dto: TasksDto) {
+	// 	return await this.prisma.task.createMany({
+	// 		data: {
+	// 			title: dto.title,
+	// 			reward: dto.reward,
+	// 			type: dto.type
+	// 		}
+	// 	})
+	// }
+
 	async createTask(dto: TasksDto) {
-		return await this.prisma.task.createMany({
-			data: {
-				title: dto.title,
-				reward: dto.reward
-			}
+		return await this.prisma.task.create({
+			data: dto
 		})
 	}
 

@@ -21,7 +21,7 @@ export class TasksController {
 
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
-	@Get('/')
+	@Get()
 	@Auth()
 	getAll(@CurrentUser('id') userId: string) {
 		return this.tasksService.getAllTasks(userId)

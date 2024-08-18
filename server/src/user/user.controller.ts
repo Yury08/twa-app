@@ -32,7 +32,7 @@ export class UserController {
 	@Auth()
 	@Post('/menu/create')
 	@HttpCode(200)
-	createUser(@CheckRole() isAdmin: boolean, @Body() dto: MenuDto) {
+	createMenu(@CheckRole() isAdmin: boolean, @Body() dto: MenuDto) {
 		if (isAdmin) {
 			return this.userService.createMenu(dto)
 		}

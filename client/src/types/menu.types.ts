@@ -5,3 +5,5 @@ export interface IMenu extends IBase {
 	link: string
 	icon: string
 }
+
+export type IMenuForm = Partial<Omit<IMenu, 'id' | 'createdAt' | 'updatedAt'>>
