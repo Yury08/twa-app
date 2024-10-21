@@ -5,7 +5,7 @@ import { saveTokenStorage } from './auth-token.service'
 
 export class AuthService {
 	async main(type: 'login' | 'reg', data: IAuthForm) {
-		const res = await axiosClassic.post<IAuthResponse>(`auth/${type}`, data)
+		const res = await axiosClassic.post<IAuthResponse>(`/auth/${type}`, data)
 
 		if (res.data.accessToken) saveTokenStorage(res.data.accessToken)
 
@@ -14,7 +14,7 @@ export class AuthService {
 
 	async getNewTokens() {
 		const res = await axiosClassic.post<IAuthResponse>(
-			'auth/login/access-token'
+			'/auth/login/access-token'
 		)
 		if (res.data.accessToken) saveTokenStorage(res.data.accessToken)
 
